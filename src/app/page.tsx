@@ -78,7 +78,12 @@ export default function Home() {
               </div>
               <div className="w-full flex justify-around">
                 <button className="cursor-pointer">Cancel</button>
-                <button className="cursor-pointer">Submit</button>
+                <button
+                  className="cursor-pointer"
+                  onClick={() => setCounts(12)}
+                >
+                  Submit
+                </button>
               </div>
             </DialogContent>
           </Dialog>
