@@ -1,7 +1,6 @@
 import Image from "next/image";
 import React from "react";
 import logo from "../../public/logo.png";
-import { CiMenuBurger } from "react-icons/ci";
 
 const Navbar = () => {
   return (
