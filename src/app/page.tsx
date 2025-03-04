@@ -174,7 +174,10 @@ export default function Home() {
           latest work. We believe in empowering people to hold government
           entities accountable for their financial decisions. Join us today!
         </p>
-        <button className="bg-black text-white [font-family:var(--font-inconsolata)] w-full py-3 uppercase">
+        <button
+          className="bg-black text-white [font-family:var(--font-inconsolata)] w-full py-3 uppercase cursor-pointer"
+          onClick={() => setOpen(true)}
+        >
           Claim $DOGE reward
         </button>
         <p
@@ -218,19 +221,18 @@ export default function Home() {
         <div>
           <div>
             <Image
-              src="https://doge-memes.b-cdn.net/doge-elon_doge-breakdown.jpg"
+              src="https://doge-memes.b-cdn.net/Article%20Images/photo_2025-02-10%2022.00.10.jpeg"
               alt=""
               width={300}
               height={300}
               className="h-auto w-full mb-5"
             />
-            <p className="uppercase mb-4">Fox News</p>
+            <p className="uppercase mb-4">The White House</p>
             <h1
               className="text-[30px] font-[600] [font-family:var(--font-oswald)] "
               style={{ lineHeight: "120%" }}
             >
-              Full Elon Musk explanation on DOGE during Executive Order Signing
-              Event with Trump (30 minutes)
+              President Trump establishes DOGE with an executive order.
             </h1>
             <p
               className="text-[14px] [font-family:var(--font-oswald)] mt-10"
@@ -242,25 +244,25 @@ export default function Home() {
 
           <div>
             <Image
-              src="https://doge-memes.b-cdn.net/doge-elon_doge-breakdown.jpg"
+              src="https://doge-memes.b-cdn.net/Article%20Images/doge-exclusivesponsor-logo.jpg"
               alt=""
               width={300}
               height={300}
               className="h-auto w-full mb-5"
             />
-            <p className="uppercase mb-4">Fox News</p>
+            <p className="uppercase mb-4">Crypto Ball Sponsor</p>
             <h1
               className="text-[30px] font-[600] [font-family:var(--font-oswald)] "
               style={{ lineHeight: "120%" }}
             >
-              Full Elon Musk explanation on DOGE during Executive Order Signing
-              Event with Trump (30 minutes)
+              DOGEGOV was at Trumps inaugural Crypto Ball as the only meme coin
+              sponsor 👀
             </h1>
             <p
               className="text-[14px] [font-family:var(--font-oswald)] mt-10"
               style={{ color: "rgba(0, 0, 0, 0.5)" }}
             >
-              12 February 2025
+              17 February 2025
             </p>
           </div>
         </div>
