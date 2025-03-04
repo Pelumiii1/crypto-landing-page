@@ -12,9 +12,7 @@ const Navbar = () => {
       }}
     >
       <Image src={logo} alt="" className="w-[64px] h-auto" />
-      <div>
-        <CiMenuBurger color="white" size="1.5rem" />
-      </div>
+      <div>{/* <CiMenuBurger color="white" size="1.5rem" /> */}</div>
     </div>
   );
 };

