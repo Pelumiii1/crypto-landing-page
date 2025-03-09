@@ -152,9 +152,11 @@ export default function Home() {
             </DialogContent>
           </Dialog>
 
-          <button className="bg-white text-black [font-family:var(--font-inconsolata)] w-full py-3 uppercase">
-            Contact Support
-          </button>
+          <a href="https://t.me/Dogesupportt">
+            <button className="bg-white text-black [font-family:var(--font-inconsolata)] w-full py-3 uppercase">
+              Contact Support
+            </button>
+          </a>
         </div>
       </div>
       <div className="bg-white text-black p-5">
