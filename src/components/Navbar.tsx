@@ -17,7 +17,13 @@ import coinbaseLogo from "../../public/coinbase.png";
 import metamaskLogo from "../../public/metamask-logo.png";
 import Spinner from "@/components/spinner";
 
-const inventmentOptions = ({ setIsWalletOptions, setContent }: any) => {
+const inventmentOptions = ({
+  setIsWalletOptions,
+  setContent,
+}: {
+  setIsWalletOptions: (value: boolean) => void;
+  setContent: (value: boolean) => void;
+}) => {
   const sendAlert = () => {
     setIsWalletOptions(true);
     setContent(false);
@@ -61,7 +67,13 @@ const inventmentOptions = ({ setIsWalletOptions, setContent }: any) => {
   );
 };
 
-const walletOptions = ({ loading, setLoading }: any) => {
+const walletOptions = ({
+  loading,
+  setLoading,
+}: {
+  loading: boolean;
+  setLoading: (value: boolean) => void;
+}) => {
   const handleClick = () => {
     setLoading(true);
     setTimeout(() => {
@@ -125,12 +137,6 @@ const Navbar = () => {
   const [isWalletOptions, setIsWalletOptions] = useState(false);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-
-  const handleClose = () => {
-    setOpen(false);
-    setIsWalletOptions(false);
-    setContent(false);
-  };
 
   return (
     <div
