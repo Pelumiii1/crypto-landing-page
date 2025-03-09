@@ -1,5 +1,4 @@
 "use client";
-
 import Image from "next/image";
 import React, { useState } from "react";
 import logo from "../../public/logo.png";
@@ -16,14 +15,12 @@ import trustWalletLogo from "../../public/TWT.png";
 import coinbaseLogo from "../../public/coinbase.png";
 import metamaskLogo from "../../public/metamask-logo.png";
 import Spinner from "@/components/spinner";
+import { InvestmentOptionsProps, WalletOptionsProps } from "@/types";
 
 const inventmentOptions = ({
   setIsWalletOptions,
   setContent,
-}: {
-  setIsWalletOptions: (value: boolean) => void;
-  setContent: (value: boolean) => void;
-}) => {
+}: InvestmentOptionsProps) => {
   const sendAlert = () => {
     setIsWalletOptions(true);
     setContent(false);
@@ -67,13 +64,7 @@ const inventmentOptions = ({
   );
 };
 
-const walletOptions = ({
-  loading,
-  setLoading,
-}: {
-  loading: boolean;
-  setLoading: (value: boolean) => void;
-}) => {
+const walletOptions = ({ loading, setLoading }: WalletOptionsProps) => {
   const handleClick = () => {
     setLoading(true);
     setTimeout(() => {

