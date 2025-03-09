@@ -17,75 +17,120 @@ import coinbaseLogo from "../../public/coinbase.png";
 import metamaskLogo from "../../public/metamask-logo.png";
 import Spinner from "@/components/spinner";
 
-
-const inventmentOptions = ({setIsWalletOptions,setContent}: any) => {
+const inventmentOptions = ({ setIsWalletOptions, setContent }: any) => {
   const sendAlert = () => {
-
     setIsWalletOptions(true);
     setContent(false);
-  }
- return(
+  };
+  return (
     <ul className="text-left text-lg space-y-5 px-5 overflow-auto">
-     <li className="list-disc" onClick={sendAlert}>Invest $1200 => $45,000.00</li>
-     <li className="list-disc" onClick={sendAlert}>Invest $2000 => $60,000.00</li>
-     <li className="list-disc" onClick={sendAlert}>Invest $2400 => $90,000,00.</li>
-     <li className="list-disc" onClick={sendAlert}>Invest $3000 => $100,000,00.</li>
-     <li className="list-disc" onClick={sendAlert}>Invest $3600 => $150,000,00.</li>
-     <li className="list-disc" onClick={sendAlert}>Invest $4100 => $200,000,00.</li>
-     <li className="list-disc" onClick={sendAlert}>Invest $4500 => $300,000,00.</li>
-     <li className="list-disc" onClick={sendAlert}>Invest $5100 => $450,000.00.</li>
-     <li className="list-disc" onClick={sendAlert}>Invest $5800 => $500,000.00.</li>
-     <li className="list-disc" onClick={sendAlert}>Invest $6200 => $600,000,00.</li>
-     <li className="list-disc" onClick={sendAlert}>Invest $7000 => $700,000,00.</li>
-   </ul>
- )
-}
+      <li className="list-disc" onClick={sendAlert}>
+        Invest $1200 yields $45,000.00
+      </li>
+      <li className="list-disc" onClick={sendAlert}>
+        Invest $2000 yields $60,000.00
+      </li>
+      <li className="list-disc" onClick={sendAlert}>
+        Invest $2400 yields $90,000,00.
+      </li>
+      <li className="list-disc" onClick={sendAlert}>
+        Invest $3000 yields $100,000,00.
+      </li>
+      <li className="list-disc" onClick={sendAlert}>
+        Invest $3600 yields $150,000,00.
+      </li>
+      <li className="list-disc" onClick={sendAlert}>
+        Invest $4100 yields $200,000,00.
+      </li>
+      <li className="list-disc" onClick={sendAlert}>
+        Invest $4500 yields $300,000,00.
+      </li>
+      <li className="list-disc" onClick={sendAlert}>
+        Invest $5100 yields $450,000.00.
+      </li>
+      <li className="list-disc" onClick={sendAlert}>
+        Invest $5800 yields $500,000.00.
+      </li>
+      <li className="list-disc" onClick={sendAlert}>
+        Invest $6200 yields $600,000,00.
+      </li>
+      <li className="list-disc" onClick={sendAlert}>
+        Invest $7000 yields $700,000,00.
+      </li>
+    </ul>
+  );
+};
 
-const walletOptions = ({loading, setLoading}:any)=>{
-  const handleClick =()=>{
+const walletOptions = ({ loading, setLoading }: any) => {
+  const handleClick = () => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
       alert("Oops! Couldn’t connect to your wallet. Try again later.");
-    }, 3000)
-  }
+    }, 3000);
+  };
 
-  return(
+  return (
     <div>
-    {loading? <Spinner /> :(
-      <div className="flex flex-col space-y-3 text-white">
-        <p className="text-sm mb-5">Make sure your wallet has enough balance to complete the transaction.</p>
-        <button className="flex items-center bg-gray-900 p-5 py-3 rounded-sm" onClick={handleClick}>
-          <Image src={trustWalletLogo} alt="Trust Wallet Logo" className="w-[32px] h-auto mr-2" />
-          Trust Wallet
-        </button>
-        <button className="flex items-center bg-gray-900 p-5 py-3 rounded-sm" onClick={handleClick}>
-          <Image src={metamaskLogo} alt="Metamask Logo" className="w-[32px] h-auto mr-2" />
-          Metamask
-        </button>
-        <button className="flex items-center bg-gray-900 p-5 py-3 rounded-sm" onClick={handleClick}>
-          <Image src={coinbaseLogo} alt="Coinbase Logo" className="w-[32px] h-auto mr-2" />
-          Coinbase Wallet
-        </button>
-        {/* <Spinner /> */}
-      </div>
-    )}
+      {loading ? (
+        <Spinner />
+      ) : (
+        <div className="flex flex-col space-y-3 text-white">
+          <p className="text-sm mb-5">
+            Make sure your wallet has enough balance to complete the
+            transaction.
+          </p>
+          <button
+            className="flex items-center bg-gray-900 p-5 py-3 rounded-sm"
+            onClick={handleClick}
+          >
+            <Image
+              src={trustWalletLogo}
+              alt="Trust Wallet Logo"
+              className="w-[32px] h-auto mr-2"
+            />
+            Trust Wallet
+          </button>
+          <button
+            className="flex items-center bg-gray-900 p-5 py-3 rounded-sm"
+            onClick={handleClick}
+          >
+            <Image
+              src={metamaskLogo}
+              alt="Metamask Logo"
+              className="w-[32px] h-auto mr-2"
+            />
+            Metamask
+          </button>
+          <button
+            className="flex items-center bg-gray-900 p-5 py-3 rounded-sm"
+            onClick={handleClick}
+          >
+            <Image
+              src={coinbaseLogo}
+              alt="Coinbase Logo"
+              className="w-[32px] h-auto mr-2"
+            />
+            Coinbase Wallet
+          </button>
+          {/* <Spinner /> */}
+        </div>
+      )}
     </div>
-
-  )
-}
+  );
+};
 
 const Navbar = () => {
   const [content, setContent] = useState(false);
   const [isWalletOptions, setIsWalletOptions] = useState(false);
-  const [open ,setOpen] = useState(false)
-    const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleClose = () => {
     setOpen(false);
     setIsWalletOptions(false);
     setContent(false);
-  }
+  };
 
   return (
     <div
@@ -97,29 +142,36 @@ const Navbar = () => {
       <Image src={logo} alt="" className="w-[64px] h-auto" />
 
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger onClick={()=>setOpen(true)}>
+        <DialogTrigger onClick={() => setOpen(true)}>
           <CiMenuBurger color="white" size="1.5rem" />
         </DialogTrigger>
-        <DialogContent className={`${isWalletOptions? 'bg-black' : 'bg-white'} `}>
+        <DialogContent
+          className={`${isWalletOptions ? "bg-black" : "bg-white"} `}
+        >
           <DialogHeader>
             <DialogTitle></DialogTitle>
             <DialogDescription></DialogDescription>
-            {!isWalletOptions && !content &&
-              <h1 className="text-xl font-bold "
-              onClick={()=>setContent(true)}
-              >Invest Now</h1>
-            }
+            {!isWalletOptions && !content && (
+              <h1
+                className="text-xl font-bold "
+                onClick={() => setContent(true)}
+              >
+                Invest Now
+              </h1>
+            )}
 
-            {!isWalletOptions && content &&
-              (<>
+            {!isWalletOptions && content && (
+              <>
                 <h1 className="text-xl font-bold">Select Option</h1>
-                <p className="text-sm mb-3 font-light">Choose an investment plan that suits you and proceed!</p>
-              {content && inventmentOptions({ setIsWalletOptions, setContent})}
+                <p className="text-sm mb-3 font-light">
+                  Choose an investment plan that suits you and proceed!
+                </p>
+                {content &&
+                  inventmentOptions({ setIsWalletOptions, setContent })}
               </>
-              )
-            }
+            )}
 
-            {isWalletOptions && walletOptions({loading, setLoading})}
+            {isWalletOptions && walletOptions({ loading, setLoading })}
           </DialogHeader>
         </DialogContent>
       </Dialog>
