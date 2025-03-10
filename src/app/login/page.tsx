@@ -92,7 +92,7 @@ const Login = () => {
               type="text"
               required
               className="w-full rounded-md border border-gray-700 bg-black px-3 py-2 text-white placeholder-gray-500 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50"
-              placeholder="enter your username"
+              placeholder="Enter your username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />

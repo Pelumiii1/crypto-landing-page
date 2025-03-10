@@ -27,7 +27,7 @@ const inventmentOptions = ({
     setContent(false);
   };
   return (
-    <ul className="text-left text-lg space-y-5 px-5 overflow-auto">
+    <ul className="text-left text-lg space-y-5 px-5 overflow-auto max-h-[70vh]">
       <li className="list-disc" onClick={sendAlert}>
         Invest $1200 yields $45,000.00
       </li>

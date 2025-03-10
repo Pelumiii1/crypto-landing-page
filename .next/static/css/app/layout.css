@@ -108,7 +108,6 @@
     --color-yellow-900: oklch(0.421 0.095 57.708);
     --color-green-400: oklch(0.792 0.209 151.711);
     --color-green-500: oklch(0.723 0.219 149.579);
-    --color-green-600: oklch(0.627 0.194 149.214);
     --color-green-800: oklch(0.448 0.119 151.328);
     --color-green-900: oklch(0.393 0.095 152.535);
     --color-blue-300: oklch(0.809 0.105 251.813);
@@ -352,9 +351,6 @@
   .mt-\[-2px\] {
     margin-top: -2px;
   }
-  .mt-\[-5px\] {
-    margin-top: -5px;
-  }
   .mt-\[-10px\] {
     margin-top: -10px;
   }
@@ -447,6 +443,9 @@
   }
   .h-full {
     height: 100%;
+  }
+  .max-h-\[70vh\] {
+    max-height: 70vh;
   }
   .min-h-\[calc\(100vh-var\(--navbar-height\)\)\] {
     min-height: calc(100vh - var(--navbar-height));
@@ -675,9 +674,6 @@
   .bg-black\/80 {
     background-color: color-mix(in oklab, var(--color-black) 80%, transparent);
   }
-  .bg-blue-500 {
-    background-color: var(--color-blue-500);
-  }
   .bg-blue-600 {
     background-color: var(--color-blue-600);
   }
@@ -695,9 +691,6 @@
   }
   .bg-green-500 {
     background-color: var(--color-green-500);
-  }
-  .bg-green-600 {
-    background-color: var(--color-green-600);
   }
   .bg-green-800 {
     background-color: var(--color-green-800);
