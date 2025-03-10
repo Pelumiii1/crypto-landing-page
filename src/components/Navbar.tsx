@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "../../public/logo.png";
 import { CiMenuBurger } from "react-icons/ci";
 import {
@@ -16,6 +16,7 @@ import coinbaseLogo from "../../public/coinbase.png";
 import metamaskLogo from "../../public/metamask-logo.png";
 import Spinner from "@/components/spinner";
 import { InvestmentOptionsProps, WalletOptionsProps } from "@/types";
+import Link from "next/link";
 
 const inventmentOptions = ({
   setIsWalletOptions,
@@ -69,7 +70,7 @@ const walletOptions = ({ loading, setLoading }: WalletOptionsProps) => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-      alert("Oops! Couldn’t connect to your wallet. Try again later.");
+      alert("Oops! Couldn't connect to your wallet. Try again later.");
     }, 3000);
   };
 
@@ -128,6 +129,25 @@ const Navbar = () => {
   const [isWalletOptions, setIsWalletOptions] = useState(false);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // Check if user is logged in
+  useEffect(() => {
+    const storedUser = localStorage.getItem("cryptoUser");
+    setIsLoggedIn(!!storedUser);
+  }, []);
+
+  // Handle logout
+  const handleLogout = () => {
+    localStorage.removeItem("cryptoUser");
+    setIsLoggedIn(false);
+    setOpen(false);
+
+    // Redirect if on profile page
+    if (window.location.pathname === "/profile") {
+      window.location.href = "/";
+    }
+  };
 
   return (
     <div
@@ -149,12 +169,38 @@ const Navbar = () => {
             <DialogTitle></DialogTitle>
             <DialogDescription></DialogDescription>
             {!isWalletOptions && !content && (
-              <h1
-                className="text-xl font-bold "
-                onClick={() => setContent(true)}
-              >
-                Invest Now
-              </h1>
+              <div className="flex flex-col space-y-4">
+                <button
+                  className="text-xl font-bold hover:text-gray-300 transition-colors"
+                  onClick={() => setContent(true)}
+                >
+                  Invest Now
+                </button>
+                {isLoggedIn ? (
+                  <>
+                    <Link
+                      href="/profile"
+                      className="text-xl font-bold hover:text-gray-300 transition-colors"
+                    >
+                      Profile
+                    </Link>
+                    <button
+                      onClick={handleLogout}
+                      className="text-xl font-bold text-red-500 hover:text-red-400 transition-colors"
+                    >
+                      Logout
+                    </button>
+                  </>
+                ) : (
+                  <Link
+                    href="/login"
+                    className="text-xl font-bold hover:text-gray-300 transition-colors"
+                    onClick={() => setOpen(false)}
+                  >
+                    Login
+                  </Link>
+                )}
+              </div>
             )}
 
             {!isWalletOptions && content && (
