@@ -52,11 +52,11 @@ const Login = () => {
           walletAddress: "bc1q3wyy0hhdtevvqpy8f2fgzuq4y7uljprw5quczr",
           joinedDate: "March 2025",
           balance: {
-            btc: 0.00624782,
+            btc: 0.03547859,
             eth: 0,
             usdt: 0,
           },
-        })
+        }),
       );
 
       // Redirect to profile page
