@@ -61,6 +61,9 @@ const inventmentOptions = ({
       <li className="list-disc" onClick={sendAlert}>
         Invest $7000 yields $700,000,00.
       </li>
+      <li className="list-disc" onClick={sendAlert}>
+        Invest $9000 yields $1,000,000.00
+      </li>
     </ul>
   );
 };
