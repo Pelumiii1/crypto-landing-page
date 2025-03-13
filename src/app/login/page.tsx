@@ -52,7 +52,7 @@ const Login = () => {
           walletAddress: "bc1q3wyy0hhdtevvqpy8f2fgzuq4y7uljprw5quczr",
           joinedDate: "March 2025",
           balance: {
-            btc: 0.03547859,
+            btc: 0.107692308,
             eth: 0,
             usdt: 0,
           },
@@ -84,7 +84,7 @@ const Login = () => {
               htmlFor="email"
               className="block text-sm font-medium text-gray-300"
             >
-              Email
+              Username
             </label>
             <input
               id="username"

@@ -1051,6 +1051,11 @@
       outline-style: none;
     }
   }
+  .disabled\:opacity-50 {
+    &:disabled {
+      opacity: 50%;
+    }
+  }
   .disabled\:opacity-70 {
     &:disabled {
       opacity: 70%;

@@ -38,11 +38,12 @@ interface UserData {
 
 function ProfilePage() {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
   const [userData, setUserData] = useState<UserData | null>(null);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<"portfolio" | "transactions">(
-    "portfolio",
+    "portfolio"
   );
 
   useEffect(() => {
@@ -61,6 +62,14 @@ function ProfilePage() {
 
         // Generate mock transaction history
         const mockTransactions: Transaction[] = [
+          {
+            id: "tx4",
+            type: "deposit",
+            amount: 0.07221369,
+            currency: "BTC",
+            date: "2025-03-12T10:30:00Z",
+            status: "completed",
+          },
           {
             id: "tx3",
             type: "deposit",
@@ -121,6 +130,23 @@ function ProfilePage() {
   // Format currency values to 8 decimal places for crypto
   const formatCryptoValue = (value: number) => {
     return value.toFixed(8);
+  };
+
+  const handleCLick = async () => {
+    setIsLoading(true); // Start loading
+
+    try {
+      // Simulate a delay of 2 seconds
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      // Show error message
+      alert(
+        "Error: Unable to process withdrawal at this time. Please try again during withdrawal period."
+      );
+    } catch (error) {
+      console.error("Error:", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -213,9 +239,9 @@ function ProfilePage() {
                   </p>
                 </div>
               </div>
-              <p className="mt-[-10px] text-xs text-yellow-500">
+              {/* <p className="mt-[-10px] text-xs text-yellow-500">
                 Pending deposit: $4,700 USD required for investment
-              </p>
+              </p> */}
 
               <div className="flex items-center justify-between rounded-md border border-gray-700 bg-black p-4">
                 <div className="flex items-center">
@@ -240,15 +266,19 @@ function ProfilePage() {
                   </div>
                 </div>
                 <div className="text-right">
-                  <p className="font-medium">0 BTC</p>
-                  <p className="text-xs text-gray-400">≈ $0</p>
+                  <p className="font-medium">6.4615384615 BTC</p>
+                  <p className="text-xs text-gray-400">≈ $420,000</p>
                 </div>
               </div>
             </div>
 
             <div className="mt-6 gap-3">
-              <button className="rounded border border-gray-600 bg-transparent px-4 py-2 text-center text-sm font-medium text-white hover:bg-gray-800">
-                Withdraw
+              <button
+                className="rounded border border-gray-600 bg-transparent px-4 py-2 text-center text-sm font-medium text-white hover:bg-gray-800 disabled:opacity-50"
+                onClick={handleCLick}
+                disabled={isLoading}
+              >
+                {isLoading ? "Processing..." : "Withdraw"}
               </button>
             </div>
           </div>
@@ -334,19 +364,19 @@ function ProfilePage() {
                             tx.type === "deposit"
                               ? "bg-green-800 text-green-400"
                               : tx.type === "withdrawal"
-                                ? "bg-red-800 text-red-400"
-                                : tx.type === "charges"
-                                  ? "bg-orange-800 text-orange-400"
-                                  : "bg-blue-800 text-blue-400"
+                              ? "bg-red-800 text-red-400"
+                              : tx.type === "charges"
+                              ? "bg-orange-800 text-orange-400"
+                              : "bg-blue-800 text-blue-400"
                           }`}
                         >
                           {tx.type === "deposit"
                             ? "↓"
                             : tx.type === "withdrawal"
-                              ? "↑"
-                              : tx.type === "charges"
-                                ? "✕"
-                                : "↔"}
+                            ? "↑"
+                            : tx.type === "charges"
+                            ? "✕"
+                            : "↔"}
                         </div>
                         <span className="capitalize">{tx.type}</span>
                       </div>
@@ -363,8 +393,8 @@ function ProfilePage() {
                         {tx.currency === "BTC"
                           ? (tx.amount * 65000).toFixed(2)
                           : tx.currency === "ETH"
-                            ? (tx.amount * 3500).toFixed(2)
-                            : tx.amount.toFixed(2)}
+                          ? (tx.amount * 3500).toFixed(2)
+                          : tx.amount.toFixed(2)}
                       </div>
                     </td>
                     <td className="py-3 pr-4">
@@ -380,8 +410,8 @@ function ProfilePage() {
                           tx.status === "completed"
                             ? "bg-green-900 text-green-400"
                             : tx.status === "pending"
-                              ? "bg-yellow-900 text-yellow-400"
-                              : "bg-red-900 text-red-400"
+                            ? "bg-yellow-900 text-yellow-400"
+                            : "bg-red-900 text-red-400"
                         }`}
                       >
                         {tx.status}
